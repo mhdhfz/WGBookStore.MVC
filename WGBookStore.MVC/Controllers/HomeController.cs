@@ -12,10 +12,21 @@ namespace WGBookStore.MVC.Controllers
     {
         public ViewResult Index()
 		{
-			return View();
+			// view name and object
+			//var obj = new { Id = 1, Name = "Hafez" };
+			//return View("About", obj);
+
+			// view from another location
+			//return View("~/TempView/PageTemp.cshtml");
+			return View("../../TempView/PageTemp");
 		}
 
 		public IActionResult About()
+		{
+			return View();
+		}
+
+		public ViewResult Contact()
 		{
 			return View();
 		}
