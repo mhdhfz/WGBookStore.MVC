@@ -29,11 +29,66 @@ namespace WGBookStore.MVC.Repositories
 		{
 			return new List<Book>()
 			{
-				new Book() {Id = 1, Title="MVC", Author = "Hafez"},
-				new Book() {Id = 2, Title="Razor Pages", Author = "Malek"},
-				new Book() {Id = 3, Title="Web API", Author = "Kamil"},
-				new Book() {Id = 4, Title="Xamarin", Author = "Nana"},
-				new Book() {Id = 5, Title="Azure", Author = "Zakwan"}
+				new Book() 
+				{
+					Id = 1,
+					Title="MVC",
+					Author = "Hafez",
+					Description = "Book about MVC",
+					Category = "Framework",
+					TotalPages = 607,
+					Language = "English"
+				},
+				new Book() 
+				{
+					Id = 2,
+					Title="Razor Pages",
+					Author = "Malek",
+					Description = "Book about Razor Pages",
+					Category = "User Interface",
+					TotalPages = 300,
+					Language = "English"
+				},
+				new Book() 
+				{
+					Id = 3,
+					Title="Web API",
+					Author = "Kamil",
+					Description = "Book about Web API",
+					Category = "API",
+					TotalPages = 509,
+					Language = "Spanish"
+				},
+				new Book() 
+				{
+					Id = 4,
+					Title="Xamarin",
+					Author = "Nana",
+					Description = "Book about Xamarin",
+					Category = "Mobile",
+					TotalPages = 491,
+					Language = "Melayu"
+				},
+				new Book() 
+				{
+					Id = 5,
+					Title="Azure",
+					Author = "Intan",
+					Description = "Book about Azure",
+					Category = "Cloud",
+					TotalPages = 982,
+					Language = "Hindi"
+				},
+				new Book() 
+				{
+					Id = 5,
+					Title="IoT",
+					Author = "Zakwan",
+					Description = "Book about IoT",
+					Category = "Internet of Things",
+					TotalPages = 1200,
+					Language = "English"
+				}
 			};
 		}
 	}

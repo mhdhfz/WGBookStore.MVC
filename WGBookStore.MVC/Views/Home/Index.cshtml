@@ -1,29 +1,65 @@
 ﻿
-@{
-    Layout = null;
-}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1>Welcome to WG Bookstore</h1>
+        <p class="lead text-muted">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, et quod! Eaque, ad.
+            Nemo rem inventore quos quasi explicabo maiores eligendi.
+            Ratione harum vitae saepe ut id quo soluta fugit.
+        </p>
+        <p>
+            <a href="#" class="btn btn-primary my-2">Search books</a>
+        </p>
+    </div>
+</section>
 
-<!DOCTYPE html>
+<div class="py-5 bg-light">
+    <div class="container">
+        <h3>Top Books</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" width="100" height="225">
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <smal class="text-muted">Author name</smal>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" width="100" height="225">
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <smal class="text-muted">Author name</smal>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" width="100" height="225">
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <smal class="text-muted">Author name</smal>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h1>Welcome to WG Book Store</h1>
-    <p>This is the home page of WG Book Store Application</p>
-    <div>@DateTime.Now.ToShortDateString()</div>
-    <div>Sum = @(3+5)</div>
-
-    @{
-        string firstName = "Hafiz";
-        string lastName = "Mustafa";
-        string fullName = $"{firstName} {lastName}";
-    }
-    <div>@fullName</div>
-    <div>email - admin@wgbookstore.com</div>
-    @* escape character *@
-    <div>twitter - @@adminwgbookstore</div>
-</body>
-</html>
+        </div>
+    </div>
+</div>

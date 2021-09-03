@@ -27,12 +27,13 @@ namespace WGBookStore.MVC.Controllers
 		public ViewResult GetAllBooks()
 		{
 			var books = _bookRepo.GetAllBooks();
-			return View();
+			return View(books);
 		}
 
-		public Book GetBook(int id)
+		public ViewResult GetBook(int id)
 		{
-			return _bookRepo.GetBookById(id);
+			var book = _bookRepo.GetBookById(id);
+			return View(book);
 		}
 
 		public List<Book> SearchBooks(string bookName, string authorName)

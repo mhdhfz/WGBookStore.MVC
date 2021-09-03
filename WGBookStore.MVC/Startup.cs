@@ -30,6 +30,8 @@ namespace WGBookStore.MVC
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseStaticFiles();
+
 			app.UseRouting();
 
 			app.UseEndpoints(endpoints =>
