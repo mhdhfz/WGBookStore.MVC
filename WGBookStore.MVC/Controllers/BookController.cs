@@ -30,7 +30,7 @@ namespace WGBookStore.MVC.Controllers
 			return View(books);
 		}
 
-		public ViewResult GetBook(int id)
+		public ViewResult GetBook(int id, string bookName)
 		{
 			var book = _bookRepo.GetBookById(id);
 			return View(book);
@@ -39,6 +39,17 @@ namespace WGBookStore.MVC.Controllers
 		public List<Book> SearchBooks(string bookName, string authorName)
 		{
 			return _bookRepo.SearchBook(bookName, authorName);
+		}
+
+		public ViewResult AddNewBook()
+		{
+			return View();
+		}
+		
+		[HttpPost]
+		public ViewResult AddNewBook(Book book)
+		{
+			return View();
 		}
     }
 }

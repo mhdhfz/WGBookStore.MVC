@@ -21,16 +21,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/book/getallbooks">All Books</a>
+                        <a class="nav-link" asp-controller="Book" asp-action="GetAllBooks">All Books</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">

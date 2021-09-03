@@ -2,10 +2,11 @@
 
 <div class="container">
     <h1>All book list</h1>
+    <a class="btn btn-primary my-2" asp-action="AddNewBook">Add New Book</a>
     <div class="row">
 
-        @foreach(var book in Model)
-         {
+        @foreach (var book in Model)
+        {
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <img class="card-img-top" width="100" height="225">
@@ -14,13 +15,17 @@
                         <p class="card-text">@book.Description</p>
                         <div class="d-flex justify-content-between align-items center">
                             <div class="btn-group">
-                                <a href="/book/getbook/@book.Id" class="btn btn-sm btn-outline-secondary">View details</a>
+                                <a class="btn btn-sm btn-outline-secondary"
+                                   asp-controller="Book"
+                                   asp-action="GetBook"
+                                   asp-route-id="@book.Id"
+                                   asp-route-bookName="@book.Title">View details</a>
                             </div>
                             <small class="text-muted">@book.Author</small>
                         </div>
                     </div>
                 </div>
             </div>
-		 }
+        }
     </div>
 </div>
