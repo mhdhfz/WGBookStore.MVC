@@ -18,7 +18,8 @@ namespace WGBookStore.MVC.Controllers
 
 			// view from another location
 			//return View("~/TempView/PageTemp.cshtml");
-			return View("../../TempView/PageTemp");
+			//return View("../../TempView/PageTemp");
+			return View();
 		}
 
 		public IActionResult About()

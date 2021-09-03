@@ -13,5 +13,17 @@
 <body>
     <h1>Welcome to WG Book Store</h1>
     <p>This is the home page of WG Book Store Application</p>
+    <div>@DateTime.Now.ToShortDateString()</div>
+    <div>Sum = @(3+5)</div>
+
+    @{
+        string firstName = "Hafiz";
+        string lastName = "Mustafa";
+        string fullName = $"{firstName} {lastName}";
+    }
+    <div>@fullName</div>
+    <div>email - admin@wgbookstore.com</div>
+    @* escape character *@
+    <div>twitter - @@adminwgbookstore</div>
 </body>
 </html>
