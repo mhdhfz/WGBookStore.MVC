@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WGBookStore.MVC.Interfaces;
+using WGBookStore.MVC.Repositories;
 
 namespace WGBookStore.MVC
 {
@@ -17,6 +19,7 @@ namespace WGBookStore.MVC
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+			services.AddScoped<IBookRepository, BookRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
