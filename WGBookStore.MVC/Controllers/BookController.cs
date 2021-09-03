@@ -24,9 +24,10 @@ namespace WGBookStore.MVC.Controllers
 			return View();
 		}
 
-		public List<Book> GetAllBooks()
+		public ViewResult GetAllBooks()
 		{
-			return _bookRepo.GetAllBooks();
+			var books = _bookRepo.GetAllBooks();
+			return View();
 		}
 
 		public Book GetBook(int id)

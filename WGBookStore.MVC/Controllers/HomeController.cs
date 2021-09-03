@@ -10,9 +10,15 @@ namespace WGBookStore.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public ViewResult Index()
 		{
-			return "WGBookStore";
+			return View();
 		}
+
+		public IActionResult About()
+		{
+			return View();
+		}
+
     }
 }
