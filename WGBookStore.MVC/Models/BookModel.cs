@@ -21,6 +21,8 @@ namespace WGBookStore.MVC.Models
 		[StringLength(500, ErrorMessage = "Please enter book description ", MinimumLength = 30)]
 		public string Description { get; set; }
 		public string Category { get; set; }
+
+		[Required(ErrorMessage = "Please choose the language of book")]
 		public string Language { get; set; }
 
 		[Required(ErrorMessage = "please enter total pages")]
