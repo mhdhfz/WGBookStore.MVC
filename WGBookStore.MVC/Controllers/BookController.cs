@@ -24,31 +24,39 @@ namespace WGBookStore.MVC.Controllers
 			return View();
 		}
 
-		public ViewResult GetAllBooks()
+		public async Task<ViewResult> GetAllBooks()
 		{
-			var books = _bookRepo.GetAllBooks();
+			var books = await _bookRepo.GetAllBooks();
 			return View(books);
 		}
 
-		public ViewResult GetBook(int id, string bookName)
+		public async Task<ViewResult> GetBook(int id, string bookName)
 		{
-			var book = _bookRepo.GetBookById(id);
+			var book = await _bookRepo.GetBookById(id);
 			return View(book);
 		}
 
-		public List<Book> SearchBooks(string bookName, string authorName)
+		public List<BookModel> SearchBooks(string bookName, string authorName)
 		{
 			return _bookRepo.SearchBook(bookName, authorName);
 		}
 
-		public ViewResult AddNewBook()
+		public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
+			ViewBag.IsSuccess = isSuccess;
+			ViewBag.BookId = bookId;
 			return View();
 		}
 		
 		[HttpPost]
-		public ViewResult AddNewBook(Book book)
+		public async Task<IActionResult> AddNewBook(BookModel book)
 		{
+			if (ModelState.IsValid)
+			{
+				var newBook = await _bookRepo.AddNewBook(book);
+				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
+
+			}
 			return View();
 		}
     }
