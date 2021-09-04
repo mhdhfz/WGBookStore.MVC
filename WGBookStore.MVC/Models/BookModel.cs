@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WGBookStore.MVC.Enums;
 
 namespace WGBookStore.MVC.Models
 {
@@ -22,8 +23,11 @@ namespace WGBookStore.MVC.Models
 		public string Description { get; set; }
 		public string Category { get; set; }
 
-		[Required(ErrorMessage = "Please choose the language of book")]
+		//[Required(ErrorMessage = "Please choose the language of book")]
 		public string Language { get; set; }
+
+		[Required(ErrorMessage = "Please choose the language of book")]
+		public LanguageEnum LanguageEnum { get; set; }
 
 		[Required(ErrorMessage = "please enter total pages")]
 		[Display(Name = "Total pages of book")]

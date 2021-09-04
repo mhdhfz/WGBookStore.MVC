@@ -50,13 +50,13 @@ namespace WGBookStore.MVC.Controllers
 			//	Value = x.Id.ToString()
 			//}).ToList();
 
-			ViewBag.Language = new List<SelectListItem>()
-			{
-				new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
-				new SelectListItem() {Text = "English", Value = "2"},
-				new SelectListItem() {Text = "Mandarin", Value = "3"},
-				new SelectListItem() {Text = "Tamil", Value = "4"},
-			};
+			//ViewBag.Language = new List<SelectListItem>()
+			//{
+			//	new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
+			//	new SelectListItem() {Text = "English", Value = "2"},
+			//	new SelectListItem() {Text = "Mandarin", Value = "3"},
+			//	new SelectListItem() {Text = "Tamil", Value = "4"},
+			//};
 
 			ViewBag.IsSuccess = isSuccess;
 			ViewBag.BookId = bookId;
@@ -73,7 +73,15 @@ namespace WGBookStore.MVC.Controllers
 
 			}
 			//ViewBag.Language = new SelectList(new List<string>() { "Melayu", "English", "Spanish" });
-			ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+			//ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+
+			//ViewBag.Language = new List<SelectListItem>()
+			//{
+			//	new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
+			//	new SelectListItem() {Text = "English", Value = "2"},
+			//	new SelectListItem() {Text = "Mandarin", Value = "3"},
+			//	new SelectListItem() {Text = "Tamil", Value = "4"},
+			//};
 
 			return View();
 		}
