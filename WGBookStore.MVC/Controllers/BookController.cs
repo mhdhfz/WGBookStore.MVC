@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,8 @@ namespace WGBookStore.MVC.Controllers
 
 		public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
-			ViewBag.Language = new List<string>() { "Melayu", "English", "Spanish" };
+			ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+
 			ViewBag.IsSuccess = isSuccess;
 			ViewBag.BookId = bookId;
 			return View();
@@ -58,9 +60,20 @@ namespace WGBookStore.MVC.Controllers
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
 			}
-			ViewBag.Language = new List<string>() { "Melayu", "English", "Spanish" };
+			//ViewBag.Language = new SelectList(new List<string>() { "Melayu", "English", "Spanish" });
+			ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
 
 			return View();
+		}
+
+		private List<LanguageModel> GetLanguages()
+		{
+			return new List<LanguageModel>()
+			{
+				new LanguageModel() {Id = 1, Name = "Melayu"},
+				new LanguageModel() {Id = 2, Name = "English"},
+				new LanguageModel() {Id = 3, Name = "Spanish"}
+			};
 		}
     }
 }
