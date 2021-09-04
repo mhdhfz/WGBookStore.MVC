@@ -144,7 +144,7 @@ namespace WGBookStore.MVC.Repositories
 				CreatedOn = DateTime.UtcNow,
 				Description = model.Description,
 				Title = model.Title,
-				TotalPages = model.TotalPages,
+				TotalPages = model.TotalPages ?? 0,
 				UpdatedOn = DateTime.UtcNow
 			};
 

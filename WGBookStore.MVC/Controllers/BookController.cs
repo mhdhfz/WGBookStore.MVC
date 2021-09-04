@@ -57,6 +57,7 @@ namespace WGBookStore.MVC.Controllers
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
 			}
+
 			return View();
 		}
     }
