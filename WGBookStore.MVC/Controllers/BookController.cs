@@ -43,6 +43,7 @@ namespace WGBookStore.MVC.Controllers
 
 		public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
+			ViewBag.Language = new List<string>() { "Melayu", "English", "Spanish" };
 			ViewBag.IsSuccess = isSuccess;
 			ViewBag.BookId = bookId;
 			return View();
@@ -57,6 +58,7 @@ namespace WGBookStore.MVC.Controllers
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
 			}
+			ViewBag.Language = new List<string>() { "Melayu", "English", "Spanish" };
 
 			return View();
 		}
