@@ -44,7 +44,19 @@ namespace WGBookStore.MVC.Controllers
 
 		public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
-			ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
+			//ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
+			//{
+			//	Text = x.Name,
+			//	Value = x.Id.ToString()
+			//}).ToList();
+
+			ViewBag.Language = new List<SelectListItem>()
+			{
+				new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
+				new SelectListItem() {Text = "English", Value = "2"},
+				new SelectListItem() {Text = "Mandarin", Value = "3"},
+				new SelectListItem() {Text = "Tamil", Value = "4"},
+			};
 
 			ViewBag.IsSuccess = isSuccess;
 			ViewBag.BookId = bookId;
