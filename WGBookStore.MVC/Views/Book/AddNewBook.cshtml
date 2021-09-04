@@ -19,30 +19,31 @@
             </button>
         </div>
 	 }
-    <form asp-controller="Book" asp-action="AddNewBook" method="post">
-        <div class="form-group">
-            <label asp-for="Title"></label>
-            <input type="text" class="form-control" asp-for="Title">
-            <span class="text-danger" asp-validation-for="Title"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Author"></label>
-            <input type="text" class="form-control" asp-for="Author">
-            <span class="text-danger" asp-validation-for="Author"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Description"></label>
-            <textarea class="form-control" asp-for="Description"></textarea>
-            <span class="text-danger" asp-validation-for="Description"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="TotalPages"></label>
-            <input class="form-control" asp-for="TotalPages">
-            <span class="text-danger" asp-validation-for="TotalPages"></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Add book" class="btn btn-primary">
-        </div>
-    </form>
+<form asp-controller="Book" asp-action="AddNewBook" method="post">
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input type="text" class="form-control" asp-for="Title">
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author"></label>
+        <input type="text" class="form-control" asp-for="Author">
+        <span class="text-danger" asp-validation-for="Author"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalPages"></label>
+        <input class="form-control" asp-for="TotalPages">
+        <span class="text-danger" asp-validation-for="TotalPages"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add book" class="btn btn-primary">
+    </div>
+</form>
 </div>
 
