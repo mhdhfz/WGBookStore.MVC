@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,15 @@ namespace WGBookStore.MVC.Controllers
     {
 		private readonly IBookRepository _bookRepo;
 		private readonly ILanguageRepository _langRepo;
+		private readonly IWebHostEnvironment _webHstEnv;
 
-		public BookController(IBookRepository bookRepo, ILanguageRepository langRepo)
+		public BookController(IBookRepository bookRepo,
+			ILanguageRepository langRepo,
+			IWebHostEnvironment webHstEnv)
 		{
 			_bookRepo = bookRepo;
 			_langRepo = langRepo;
+			_webHstEnv = webHstEnv;
 		}
 
 		[HttpGet]
@@ -59,6 +65,15 @@ namespace WGBookStore.MVC.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				if (book.CoverPhoto != null)
+				{
+					string folder = "images/books/covers/";
+					folder += Guid.NewGuid().ToString() + "_" + book.CoverPhoto.FileName;
+					string serverFolder = Path.Combine(_webHstEnv.WebRootPath, folder);
+
+					await book.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+				}
 				var newBook = await _bookRepo.AddNewBook(book);
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
