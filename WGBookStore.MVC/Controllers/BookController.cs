@@ -69,6 +69,9 @@ namespace WGBookStore.MVC.Controllers
 				{
 					string folder = "images/books/covers/";
 					folder += Guid.NewGuid().ToString() + "_" + book.CoverPhoto.FileName;
+
+					book.CoverPhotoPath = "/"+folder;
+
 					string serverFolder = Path.Combine(_webHstEnv.WebRootPath, folder);
 
 					await book.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));

@@ -32,6 +32,7 @@ namespace WGBookStore.MVC.Repositories
 				  Language = book.Language.Name,
 				  Title = book.Title,
 				  TotalPages = book.TotalPages,
+				  CoverPhotoPath = book.CoverPhotoUrl
 			  }).ToListAsync();
 		}
 
@@ -47,7 +48,8 @@ namespace WGBookStore.MVC.Repositories
 					 LanguageId = book.LanguageId,
 					 Language = book.Language.Name,
 					 Title = book.Title,
-					 TotalPages = book.TotalPages
+					 TotalPages = book.TotalPages,
+					 CoverPhotoPath = book.CoverPhotoUrl
 				 }).FirstOrDefaultAsync();
 
 		}
@@ -67,7 +69,8 @@ namespace WGBookStore.MVC.Repositories
 				Title = model.Title,
 				LanguageId = model.LanguageId,
 				TotalPages = model.TotalPages ?? 0,
-				UpdatedOn = DateTime.UtcNow
+				UpdatedOn = DateTime.UtcNow,
+				CoverPhotoUrl = model.CoverPhotoPath
 			};
 
 			await _context.Books.AddAsync(newBook);
