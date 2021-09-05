@@ -13,10 +13,12 @@ namespace WGBookStore.MVC.Controllers
     public class BookController : Controller
     {
 		private readonly IBookRepository _bookRepo;
+		private readonly ILanguageRepository _langRepo;
 
-		public BookController(IBookRepository bookRepo)
+		public BookController(IBookRepository bookRepo, ILanguageRepository langRepo)
 		{
 			_bookRepo = bookRepo;
+			_langRepo = langRepo;
 		}
 
 		[HttpGet]
@@ -42,21 +44,10 @@ namespace WGBookStore.MVC.Controllers
 			return _bookRepo.SearchBook(bookName, authorName);
 		}
 
-		public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
+		public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
-			//ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
-			//{
-			//	Text = x.Name,
-			//	Value = x.Id.ToString()
-			//}).ToList();
 
-			//ViewBag.Language = new List<SelectListItem>()
-			//{
-			//	new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
-			//	new SelectListItem() {Text = "English", Value = "2"},
-			//	new SelectListItem() {Text = "Mandarin", Value = "3"},
-			//	new SelectListItem() {Text = "Tamil", Value = "4"},
-			//};
+			ViewBag.Language = new SelectList(await _langRepo.GetAllLanguages(), "LanguageId", "Name");
 
 			ViewBag.IsSuccess = isSuccess;
 			ViewBag.BookId = bookId;
@@ -72,28 +63,9 @@ namespace WGBookStore.MVC.Controllers
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
 			}
-			//ViewBag.Language = new SelectList(new List<string>() { "Melayu", "English", "Spanish" });
-			//ViewBag.Language = new SelectList(GetLanguages(), "Id", "Name");
-
-			//ViewBag.Language = new List<SelectListItem>()
-			//{
-			//	new SelectListItem() {Text = "Melayu", Value = "1", Selected = true},
-			//	new SelectListItem() {Text = "English", Value = "2"},
-			//	new SelectListItem() {Text = "Mandarin", Value = "3"},
-			//	new SelectListItem() {Text = "Tamil", Value = "4"},
-			//};
+			ViewBag.Language = new SelectList(await _langRepo.GetAllLanguages(), "LanguageId", "Name");
 
 			return View();
-		}
-
-		private List<LanguageModel> GetLanguages()
-		{
-			return new List<LanguageModel>()
-			{
-				new LanguageModel() {Id = 1, Name = "Melayu"},
-				new LanguageModel() {Id = 2, Name = "English"},
-				new LanguageModel() {Id = 3, Name = "Spanish"}
-			};
 		}
     }
 }

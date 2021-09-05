@@ -19,15 +19,19 @@ namespace WGBookStore.MVC.Models
 		[Required(ErrorMessage = "Please enter author name")]
 		public string Author { get; set; }
 
-		[StringLength(500, ErrorMessage = "Please enter book description ", MinimumLength = 30)]
+		[StringLength(500, ErrorMessage = "Please enter book description ")]
 		public string Description { get; set; }
 		public string Category { get; set; }
 
-		//[Required(ErrorMessage = "Please choose the language of book")]
+		[Required(ErrorMessage = "Please choose the language of book")]
+		[Display(Name = "Language")]
+		public int LanguageId { get; set; }
+
 		public string Language { get; set; }
 
-		[Required(ErrorMessage = "Please choose the language of book")]
-		public LanguageEnum LanguageEnum { get; set; }
+
+		//[Required(ErrorMessage = "Please choose the language of book")]
+		//public LanguageEnum LanguageEnum { get; set; }
 
 		[Required(ErrorMessage = "please enter total pages")]
 		[Display(Name = "Total pages of book")]

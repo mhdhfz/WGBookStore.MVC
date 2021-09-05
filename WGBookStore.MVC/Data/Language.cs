@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WGBookStore.MVC.Models
+namespace WGBookStore.MVC.Data
 {
-    public class LanguageModel
+    public class Language
     {
 		public int LanguageId { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
+
+		public ICollection<Book> Books { get; set; }
 
 	}
 }

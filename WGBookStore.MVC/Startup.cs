@@ -32,6 +32,7 @@ namespace WGBookStore.MVC
 			   options.UseSqlServer(Configuration.GetConnectionString("BookStoreConnection")));
 			services.AddControllersWithViews();
 			services.AddScoped<IBookRepository, BookRepository>();
+			services.AddScoped<ILanguageRepository, LanguageRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
