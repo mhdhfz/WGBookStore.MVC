@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -68,15 +69,26 @@ namespace WGBookStore.MVC.Controllers
 				if (book.CoverPhoto != null)
 				{
 					string folder = "images/books/covers/";
-					folder += Guid.NewGuid().ToString() + "_" + book.CoverPhoto.FileName;
-
-					book.CoverPhotoPath = "/"+folder;
-
-					string serverFolder = Path.Combine(_webHstEnv.WebRootPath, folder);
-
-					await book.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-
+					book.CoverPhotoPath = await UploadImage(folder, book.CoverPhoto);
 				}
+				
+				if (book.GalleryFiles != null)
+				{
+					string folder = "images/books/gallery/";
+
+					book.Galleries = new List<GalleryModel>();
+
+					foreach (var file in book.GalleryFiles)
+					{
+						var gallery = new GalleryModel()
+						{
+							Name = file.FileName,
+							URL = await UploadImage(folder, file)
+						};
+						book.Galleries.Add(gallery);
+					}
+				}
+
 				var newBook = await _bookRepo.AddNewBook(book);
 				return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = newBook.Id});
 
@@ -85,5 +97,17 @@ namespace WGBookStore.MVC.Controllers
 
 			return View();
 		}
-    }
+
+		private async Task<string> UploadImage(string folderPath, IFormFile file)
+		{
+			
+			folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+
+			string serverFolder = Path.Combine(_webHstEnv.WebRootPath, folderPath);
+
+			await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+			return "/" + folderPath;
+		}
+	}
 }

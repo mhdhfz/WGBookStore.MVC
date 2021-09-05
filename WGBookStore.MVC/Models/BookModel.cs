@@ -39,5 +39,9 @@ namespace WGBookStore.MVC.Models
 		public IFormFile CoverPhoto { get; set; }
 		public string CoverPhotoPath { get; set; }
 
+		[Display(Name = "Choose the gallery images of your book")]
+		[Required]
+		public IFormFileCollection GalleryFiles { get; set; }
+		public List<GalleryModel> Galleries { get; set; }
 	}
 }

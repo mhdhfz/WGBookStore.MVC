@@ -49,7 +49,13 @@ namespace WGBookStore.MVC.Repositories
 					 Language = book.Language.Name,
 					 Title = book.Title,
 					 TotalPages = book.TotalPages,
-					 CoverPhotoPath = book.CoverPhotoUrl
+					 CoverPhotoPath = book.CoverPhotoUrl,
+					 Galleries = book.BookGalleries.Select(g => new GalleryModel() 
+					 {
+						Id = g.Id,
+						Name = g.Name,
+						URL = g.URL
+					 }).ToList()
 				 }).FirstOrDefaultAsync();
 
 		}
@@ -72,6 +78,17 @@ namespace WGBookStore.MVC.Repositories
 				UpdatedOn = DateTime.UtcNow,
 				CoverPhotoUrl = model.CoverPhotoPath
 			};
+
+			newBook.BookGalleries = new List<BookGallery>();
+
+			foreach (var file in model.Galleries)
+			{
+				newBook.BookGalleries.Add(new BookGallery()
+				{
+					Name = file.Name,
+					URL = file.URL
+				});
+			}
 
 			await _context.Books.AddAsync(newBook);
 			await _context.SaveChangesAsync();
