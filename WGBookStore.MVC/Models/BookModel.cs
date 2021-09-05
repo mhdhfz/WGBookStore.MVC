@@ -29,10 +29,6 @@ namespace WGBookStore.MVC.Models
 
 		public string Language { get; set; }
 
-
-		//[Required(ErrorMessage = "Please choose the language of book")]
-		//public LanguageEnum LanguageEnum { get; set; }
-
 		[Required(ErrorMessage = "please enter total pages")]
 		[Display(Name = "Total pages of book")]
 		public int? TotalPages { get; set; }
