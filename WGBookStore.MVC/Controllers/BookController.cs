@@ -36,7 +36,7 @@ namespace WGBookStore.MVC.Controllers
 
 		public async Task<ViewResult> GetAllBooks()
 		{
-			var books = await _bookRepo.GetTopBooks();
+			var books = await _bookRepo.GetAllBooks();
 			return View(books);
 		}
 

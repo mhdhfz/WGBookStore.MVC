@@ -35,7 +35,8 @@ namespace WGBookStore.MVC.Repositories
 				  CoverPhotoPath = book.CoverPhotoUrl
 			  }).ToListAsync();
 		}
-		public async Task<List<BookModel>> GetTopBooks()
+
+		public async Task<List<BookModel>> GetTopBooks(int count)
 		{
 			return await _context.Books
 			  .Select(book => new BookModel()
@@ -49,7 +50,7 @@ namespace WGBookStore.MVC.Repositories
 				  Title = book.Title,
 				  TotalPages = book.TotalPages,
 				  CoverPhotoPath = book.CoverPhotoUrl
-			  }).Take(3).ToListAsync();
+			  }).Take(count).ToListAsync();
 		}
 
 		public async Task<BookModel> GetBookById(int id)

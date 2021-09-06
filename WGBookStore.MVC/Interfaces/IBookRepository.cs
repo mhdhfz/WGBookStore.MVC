@@ -11,7 +11,7 @@ namespace WGBookStore.MVC.Interfaces
     public interface IBookRepository
     {
 		Task<List<BookModel>> GetAllBooks();
-		Task<List<BookModel>> GetTopBooks();
+		Task<List<BookModel>> GetTopBooks(int count);
 		Task<BookModel> GetBookById(int id);
 		List<BookModel> SearchBook(string title, string authorName);
 		Task<Book> AddNewBook(BookModel book);

@@ -18,9 +18,9 @@ namespace WGBookStore.MVC.Components
 			_bookRepo = bookRepo;
 		}
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int count)
 		{
-			var topBooks = await _bookRepo.GetTopBooks();
+			var topBooks = await _bookRepo.GetTopBooks(count);
 			return View(topBooks);
 		}
     }
