@@ -35,6 +35,22 @@ namespace WGBookStore.MVC.Repositories
 				  CoverPhotoPath = book.CoverPhotoUrl
 			  }).ToListAsync();
 		}
+		public async Task<List<BookModel>> GetTopBooks()
+		{
+			return await _context.Books
+			  .Select(book => new BookModel()
+			  {
+				  Author = book.Author,
+				  Category = book.Category,
+				  Description = book.Description,
+				  Id = book.Id,
+				  LanguageId = book.LanguageId,
+				  Language = book.Language.Name,
+				  Title = book.Title,
+				  TotalPages = book.TotalPages,
+				  CoverPhotoPath = book.CoverPhotoUrl
+			  }).Take(3).ToListAsync();
+		}
 
 		public async Task<BookModel> GetBookById(int id)
 		{
