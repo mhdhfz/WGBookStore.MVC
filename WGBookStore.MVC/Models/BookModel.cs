@@ -43,5 +43,11 @@ namespace WGBookStore.MVC.Models
 		[Required]
 		public IFormFileCollection GalleryFiles { get; set; }
 		public List<GalleryModel> Galleries { get; set; }
+
+		[Display(Name = "Upload book in pdf format")]
+		[Required]
+		public IFormFile BookPdf { get; set; }
+		public string BookPdfPath { get; set; }
+
 	}
 }

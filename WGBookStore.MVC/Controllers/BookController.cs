@@ -68,13 +68,13 @@ namespace WGBookStore.MVC.Controllers
 			{
 				if (book.CoverPhoto != null)
 				{
-					string folder = "images/books/covers/";
-					book.CoverPhotoPath = await UploadImage(folder, book.CoverPhoto);
+					string folder = "books/cover/";
+					book.CoverPhotoPath = await UploadFile(folder, book.CoverPhoto);
 				}
 				
 				if (book.GalleryFiles != null)
 				{
-					string folder = "images/books/gallery/";
+					string folder = "books/gallery/";
 
 					book.Galleries = new List<GalleryModel>();
 
@@ -83,10 +83,16 @@ namespace WGBookStore.MVC.Controllers
 						var gallery = new GalleryModel()
 						{
 							Name = file.FileName,
-							URL = await UploadImage(folder, file)
+							URL = await UploadFile(folder, file)
 						};
 						book.Galleries.Add(gallery);
 					}
+				}
+
+				if (book.BookPdf != null)
+				{
+					string folder = "books/pdf/";
+					book.BookPdfPath = await UploadFile(folder, book.BookPdf);
 				}
 
 				var newBook = await _bookRepo.AddNewBook(book);
@@ -98,7 +104,7 @@ namespace WGBookStore.MVC.Controllers
 			return View();
 		}
 
-		private async Task<string> UploadImage(string folderPath, IFormFile file)
+		private async Task<string> UploadFile(string folderPath, IFormFile file)
 		{
 			
 			folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;

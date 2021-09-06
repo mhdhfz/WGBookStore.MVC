@@ -55,7 +55,8 @@ namespace WGBookStore.MVC.Repositories
 						Id = g.Id,
 						Name = g.Name,
 						URL = g.URL
-					 }).ToList()
+					 }).ToList(),
+					 BookPdfPath = book.BookPdfUrl
 				 }).FirstOrDefaultAsync();
 
 		}
@@ -76,7 +77,8 @@ namespace WGBookStore.MVC.Repositories
 				LanguageId = model.LanguageId,
 				TotalPages = model.TotalPages ?? 0,
 				UpdatedOn = DateTime.UtcNow,
-				CoverPhotoUrl = model.CoverPhotoPath
+				CoverPhotoUrl = model.CoverPhotoPath,
+				BookPdfUrl = model.BookPdfPath
 			};
 
 			newBook.BookGalleries = new List<BookGallery>();
