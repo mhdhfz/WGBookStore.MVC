@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,8 @@ namespace WGBookStore.MVC
 		{
 			services.AddDbContext<BookStoreContext>(options =>
 			   options.UseSqlServer(Configuration.GetConnectionString("BookStoreConnection")));
+			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddEntityFrameworkStores<BookStoreContext>();
 			services.AddControllersWithViews();
 			services.AddScoped<IBookRepository, BookRepository>();
 			services.AddScoped<ILanguageRepository, LanguageRepository>();
@@ -46,6 +49,8 @@ namespace WGBookStore.MVC
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
 
 			app.UseEndpoints(endpoints =>
 			{
