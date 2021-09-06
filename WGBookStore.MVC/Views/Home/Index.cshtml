@@ -18,7 +18,14 @@
         <h3>Top Books</h3>
         <div class="row">
             <div class="col-md-4">
+                @* partial tag helper *@
                 <partial name="_BookThumbnail" model="new BookModel()"/>
+
+                @* html partial *@
+                @*@Html.Partial("_BookThumbnail", new BookModel())*@
+                @*@Html.PartialAsync("_BookThumbnail", new BookModel())*@
+                @*@{ Html.RenderPartial("_BookThumbnail", new BookModel()); }*@
+                @*@{ Html.RenderPartialAsync("_BookThumbnail", new BookModel()); }*@
             </div>
             <div class="col-md-4">
                 <partial name="_BookThumbnail" model="new BookModel()"/>
