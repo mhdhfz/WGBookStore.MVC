@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WGBookStore.MVC.Data;
 using WGBookStore.MVC.Interfaces;
+using WGBookStore.MVC.Models;
 using WGBookStore.MVC.Repositories;
 
 namespace WGBookStore.MVC
@@ -31,7 +32,7 @@ namespace WGBookStore.MVC
 		{
 			services.AddDbContext<BookStoreContext>(options =>
 			   options.UseSqlServer(Configuration.GetConnectionString("BookStoreConnection")));
-			services.AddIdentity<IdentityUser, IdentityRole>()
+			services.AddIdentity<ApplicationUser, IdentityRole>()
 				.AddEntityFrameworkStores<BookStoreContext>();
 			services.AddControllersWithViews();
 			services.AddScoped<IBookRepository, BookRepository>();

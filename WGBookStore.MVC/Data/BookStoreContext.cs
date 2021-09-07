@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WGBookStore.MVC.Models;
 
 namespace WGBookStore.MVC.Data
 {
-    public class BookStoreContext : IdentityDbContext
+    public class BookStoreContext : IdentityDbContext<ApplicationUser>
     {
 		public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
 		{
