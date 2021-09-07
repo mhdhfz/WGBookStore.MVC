@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WGBookStore.MVC.Data;
+using WGBookStore.MVC.Helpers;
 using WGBookStore.MVC.Interfaces;
 using WGBookStore.MVC.Models;
 using WGBookStore.MVC.Repositories;
@@ -53,6 +54,7 @@ namespace WGBookStore.MVC
 			services.AddScoped<IBookRepository, BookRepository>();
 			services.AddScoped<ILanguageRepository, LanguageRepository>();
 			services.AddScoped<IAccountRepository, AccountRepository>();
+			services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

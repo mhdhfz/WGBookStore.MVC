@@ -3,7 +3,7 @@
 @if (_signInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        Hi, @User.Identity.Name
+        Hi, @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
     </li> 
     <li class="nav-item">
         <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-primary mr-2 mb-sm-2">Logout</a>
