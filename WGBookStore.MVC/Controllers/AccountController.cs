@@ -45,5 +45,27 @@ namespace WGBookStore.MVC.Controllers
 			return View();
 		}
 
-    }
+		[Route("login")]
+		public IActionResult SignIn()
+		{
+			return View();
+		}
+
+		[Route("login")]
+		[HttpPost]
+		public async Task<IActionResult> SignIn(SignInUserModel signInUser)
+		{
+			if (ModelState.IsValid)
+			{
+				var result = await _accRepo.UserSignInAsync(signInUser);
+				if (result.Succeeded)
+				{
+					return RedirectToAction("Index", "Home");
+				}
+
+				ModelState.AddModelError("", "Invalid Credentials");
+			}
+			return View(signInUser);
+		}
+	}
 }

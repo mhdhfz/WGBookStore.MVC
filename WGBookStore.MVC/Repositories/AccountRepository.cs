@@ -12,11 +12,15 @@ namespace WGBookStore.MVC.Repositories
 	public class AccountRepository : IAccountRepository
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
+		private readonly SignInManager<ApplicationUser> _signInManager;
 
-		public AccountRepository(UserManager<ApplicationUser> userManager)
+		public AccountRepository(UserManager<ApplicationUser> userManager, 
+			SignInManager<ApplicationUser> signInManager)
 		{
 			_userManager = userManager;
+			_signInManager = signInManager;
 		}
+
 		public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
 		{
 			var user = new ApplicationUser()
@@ -27,6 +31,11 @@ namespace WGBookStore.MVC.Repositories
 
 			var result = await _userManager.CreateAsync(user, userModel.Password);
 			return result;
+		}
+
+		public async Task<SignInResult> UserSignInAsync(SignInUserModel signInUser)
+		{
+			return await _signInManager.PasswordSignInAsync(signInUser.Email, signInUser.Password, signInUser.RememberMe, false);
 		}
 	}
 }

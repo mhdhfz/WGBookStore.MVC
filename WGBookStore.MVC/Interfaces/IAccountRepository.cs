@@ -11,5 +11,7 @@ namespace WGBookStore.MVC.Interfaces
     public interface IAccountRepository
     {
 		Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
-    }
+		Task<SignInResult> UserSignInAsync(SignInUserModel signInUser);
+
+	}
 }
