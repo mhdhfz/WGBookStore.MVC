@@ -67,5 +67,12 @@ namespace WGBookStore.MVC.Controllers
 			}
 			return View(signInUser);
 		}
+
+		[Route("logout")]
+		public async Task<IActionResult> Logout()
+		{
+			await _accRepo.SignOutAsync();
+			return RedirectToAction("Index", "Home");
+		}
 	}
 }

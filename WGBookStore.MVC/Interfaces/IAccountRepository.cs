@@ -8,10 +8,10 @@ using WGBookStore.MVC.Models;
 
 namespace WGBookStore.MVC.Interfaces
 {
-    public interface IAccountRepository
-    {
+	public interface IAccountRepository
+	{
 		Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
 		Task<SignInResult> UserSignInAsync(SignInUserModel signInUser);
-
+		Task SignOutAsync();
 	}
 }

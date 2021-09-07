@@ -37,5 +37,10 @@ namespace WGBookStore.MVC.Repositories
 		{
 			return await _signInManager.PasswordSignInAsync(signInUser.Email, signInUser.Password, signInUser.RememberMe, false);
 		}
+
+		public async Task SignOutAsync()
+		{
+			await _signInManager.SignOutAsync();
+		}
 	}
 }
