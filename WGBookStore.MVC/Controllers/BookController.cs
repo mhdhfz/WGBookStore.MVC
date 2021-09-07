@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -51,6 +52,7 @@ namespace WGBookStore.MVC.Controllers
 			return _bookRepo.SearchBook(bookName, authorName);
 		}
 
+		[Authorize]
 		public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
 		{
 

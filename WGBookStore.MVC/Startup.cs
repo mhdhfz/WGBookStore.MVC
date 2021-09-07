@@ -44,6 +44,11 @@ namespace WGBookStore.MVC
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequireUppercase = false;
 			});
+
+			services.ConfigureApplicationCookie(config =>
+		   {
+			   config.LoginPath = Configuration["Application:LoginPath"];
+		   });
 			services.AddControllersWithViews();
 			services.AddScoped<IBookRepository, BookRepository>();
 			services.AddScoped<ILanguageRepository, LanguageRepository>();
@@ -63,6 +68,8 @@ namespace WGBookStore.MVC
 			app.UseRouting();
 
 			app.UseAuthentication();
+
+			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
