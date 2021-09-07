@@ -53,13 +53,17 @@ namespace WGBookStore.MVC.Controllers
 
 		[Route("login")]
 		[HttpPost]
-		public async Task<IActionResult> SignIn(SignInUserModel signInUser)
+		public async Task<IActionResult> SignIn(SignInUserModel signInUser, string returnUrl)
 		{
 			if (ModelState.IsValid)
 			{
 				var result = await _accRepo.UserSignInAsync(signInUser);
 				if (result.Succeeded)
 				{
+					if (!string.IsNullOrEmpty(returnUrl))
+					{
+						return LocalRedirect(returnUrl);
+					}
 					return RedirectToAction("Index", "Home");
 				}
 

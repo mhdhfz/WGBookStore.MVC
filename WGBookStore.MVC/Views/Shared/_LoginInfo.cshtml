@@ -15,6 +15,6 @@ else
         <a asp-controller="Account" asp-action="SignUp" class="btn btn-outline-primary mr-2 mb-sm-2">Register</a>
     </li>
     <li class="nav-item">
-        <a asp-controller="Account" asp-action="SignIn" class="btn btn-primary">Login</a>
+        <a asp-controller="Account" asp-action="SignIn" asp-route-returnUrl="@Context.Request.Path" class="btn btn-primary">Login</a>
     </li>
 }
