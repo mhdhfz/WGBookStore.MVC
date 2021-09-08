@@ -57,6 +57,7 @@ namespace WGBookStore.MVC
 			services.AddScoped<IAccountRepository, AccountRepository>();
 			services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 			services.AddScoped<IUserService, UserService>();
+			services.AddScoped<IEmailService, EmailService>();
 
 			services.Configure<SMTPConfigModel>(Configuration.GetSection("SMTPConfig"));
 		}

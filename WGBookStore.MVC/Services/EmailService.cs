@@ -7,14 +7,24 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using WGBookStore.MVC.Interfaces;
 using WGBookStore.MVC.Models;
 
 namespace WGBookStore.MVC.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
 		private const string templatePath = @"EmailTemplate/{0}/html";
 		private readonly SMTPConfigModel _smtpConfig;
+
+		public async Task SendTestEmail(UserEmailOptionModel userEmailOption)
+		{
+			userEmailOption.Subject = "this is test email subject from book store we app";
+			userEmailOption.Body = GetEmailBody("TestEmail");
+
+			await SendEmail(userEmailOption);
+
+		}
 
 		public EmailService(IOptions<SMTPConfigModel> smtpConfig)
 		{
@@ -52,7 +62,7 @@ namespace WGBookStore.MVC.Services
 
 		private string GetEmailBody(string templateName)
 		{
-			var body = File.ReadAllText(string.Format(templateName, templateName));
+			var body = File.ReadAllText(string.Format(templatePath, templateName));
 			return body;
 		}
     }

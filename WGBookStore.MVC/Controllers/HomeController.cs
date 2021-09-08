@@ -5,21 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WGBookStore.MVC.Interfaces;
+using WGBookStore.MVC.Models;
 
 namespace WGBookStore.MVC.Controllers
 {
     public class HomeController : Controller
     {
 		private readonly IUserService _userService;
+		private readonly IEmailService _emailService;
 
-		public HomeController(IUserService userService)
+		public HomeController(IUserService userService,
+			IEmailService emailService)
 		{
 			_userService = userService;
+			_emailService = emailService;
 		}
-        public ViewResult Index()
+        public async Task<ViewResult> Index()
 		{
-			var userId = _userService.GetUserId();
-			var isLoggedIn = _userService.IsAuthenticated();
+			var userEmailOption = new UserEmailOptionModel
+			{
+				ToEmails = new List<string> { "test@gmail.com" }
+			};
+
+			await _emailService.SendTestEmail(userEmailOption);
+			//var userId = _userService.GetUserId();
+			//var isLoggedIn = _userService.IsAuthenticated();
 			return View();
 		}
 
