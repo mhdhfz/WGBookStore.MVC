@@ -14,13 +14,22 @@ namespace WGBookStore.MVC.Services
 {
     public class EmailService : IEmailService
     {
-		private const string templatePath = @"EmailTemplate/{0}/html";
+		private const string templatePath = @"EmailTemplate/{0}.html";
 		private readonly SMTPConfigModel _smtpConfig;
 
 		public async Task SendTestEmail(UserEmailOptionModel userEmailOption)
 		{
-			userEmailOption.Subject = "this is test email subject from book store we app";
-			userEmailOption.Body = GetEmailBody("TestEmail");
+			userEmailOption.Subject = UpdatePlaceHolders("Hello {{UserName}}, this is test email subject from book store web app", userEmailOption.PlaceHolders);
+			userEmailOption.Body = UpdatePlaceHolders(GetEmailBody("TestEmail"), userEmailOption.PlaceHolders);
+
+			await SendEmail(userEmailOption);
+
+		}
+		
+		public async Task SendEmailForEmailConfirmation(UserEmailOptionModel userEmailOption)
+		{
+			userEmailOption.Subject = UpdatePlaceHolders("Hello {{UserName}}, Confirm your email id", userEmailOption.PlaceHolders);
+			userEmailOption.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), userEmailOption.PlaceHolders);
 
 			await SendEmail(userEmailOption);
 
@@ -65,5 +74,21 @@ namespace WGBookStore.MVC.Services
 			var body = File.ReadAllText(string.Format(templatePath, templateName));
 			return body;
 		}
+
+		private string UpdatePlaceHolders(string text, List<KeyValuePair<string, string>> keyValuePairs)
+		{
+			if (!string.IsNullOrEmpty(text) && keyValuePairs != null)
+			{
+				foreach (var placeholder in keyValuePairs)
+				{
+					if (text.Contains(placeholder.Key))
+					{
+						text = text.Replace(placeholder.Key, placeholder.Value);
+					}
+				}
+			}
+			return text;
+		}
+
     }
 }

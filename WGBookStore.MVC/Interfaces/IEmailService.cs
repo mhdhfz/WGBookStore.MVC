@@ -10,5 +10,6 @@ namespace WGBookStore.MVC.Interfaces
     public interface IEmailService
     {
 		Task SendTestEmail(UserEmailOptionModel userEmailOption);
+		Task SendEmailForEmailConfirmation(UserEmailOptionModel userEmailOption);
 	}
 }

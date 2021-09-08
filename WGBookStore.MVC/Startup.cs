@@ -35,7 +35,7 @@ namespace WGBookStore.MVC
 			services.AddDbContext<BookStoreContext>(options =>
 			   options.UseSqlServer(Configuration.GetConnectionString("BookStoreConnection")));
 			services.AddIdentity<ApplicationUser, IdentityRole>()
-				.AddEntityFrameworkStores<BookStoreContext>();
+				.AddEntityFrameworkStores<BookStoreContext>().AddDefaultTokenProviders();
 
 			services.Configure<IdentityOptions>(options =>
 			{
@@ -45,6 +45,8 @@ namespace WGBookStore.MVC
 				options.Password.RequireLowercase = false;
 				options.Password.RequireNonAlphanumeric = false;
 				options.Password.RequireUppercase = false;
+
+				options.SignIn.RequireConfirmedEmail = true;
 			});
 
 			services.ConfigureApplicationCookie(config =>

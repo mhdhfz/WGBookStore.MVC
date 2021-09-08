@@ -20,14 +20,19 @@ namespace WGBookStore.MVC.Controllers
 			_userService = userService;
 			_emailService = emailService;
 		}
-        public async Task<ViewResult> Index()
+        public ViewResult Index()
 		{
-			var userEmailOption = new UserEmailOptionModel
-			{
-				ToEmails = new List<string> { "test@gmail.com" }
-			};
+			//var userEmailOption = new UserEmailOptionModel
+			//{
+			//	ToEmails = new List<string> { "test@gmail.com" },
+			//	PlaceHolders = new List<KeyValuePair<string, string>>()
+			//	{
+			//		new KeyValuePair<string, string>("{{UserName}}", "hafiz")
+			//	}
+				
+			//};
 
-			await _emailService.SendTestEmail(userEmailOption);
+			//await _emailService.SendTestEmail(userEmailOption);
 			//var userId = _userService.GetUserId();
 			//var isLoggedIn = _userService.IsAuthenticated();
 			return View();

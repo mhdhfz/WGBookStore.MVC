@@ -66,8 +66,14 @@ namespace WGBookStore.MVC.Controllers
 					}
 					return RedirectToAction("Index", "Home");
 				}
-
-				ModelState.AddModelError("", "Invalid Credentials");
+				if (result.IsNotAllowed)
+				{
+					ModelState.AddModelError("", "Not allowed to login");
+				}
+				else
+				{
+					ModelState.AddModelError("", "Invalid Credentials");
+				}
 			}
 			return View(signInUser);
 		}
