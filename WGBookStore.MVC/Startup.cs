@@ -15,6 +15,7 @@ using WGBookStore.MVC.Helpers;
 using WGBookStore.MVC.Interfaces;
 using WGBookStore.MVC.Models;
 using WGBookStore.MVC.Repositories;
+using WGBookStore.MVC.Services;
 
 namespace WGBookStore.MVC
 {
@@ -55,6 +56,7 @@ namespace WGBookStore.MVC
 			services.AddScoped<ILanguageRepository, LanguageRepository>();
 			services.AddScoped<IAccountRepository, AccountRepository>();
 			services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+			services.AddScoped<IUserService, UserService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

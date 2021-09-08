@@ -2,15 +2,18 @@
 
 @if (_signInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        Hi, @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
-    </li> 
-    <li class="nav-item">
-        <a asp-controller="Account" asp-action="Logout" class="btn btn-outline-primary mr-2 mb-sm-2">Logout</a>
-    </li> 
-}
-else
-{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Hi, @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a asp-controller="Account" asp-action="Logout" class="dropdown-item">Logout</a>
+            <a asp-controller="Account" asp-action="ChangePassword" class="dropdown-item">Change password</a>
+        </div>
+    </li>                             
+ }
+ else
+ {
     <li class="nav-item">
         <a asp-controller="Account" asp-action="SignUp" class="btn btn-outline-primary mr-2 mb-sm-2">Register</a>
     </li>

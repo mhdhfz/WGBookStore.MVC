@@ -13,5 +13,6 @@ namespace WGBookStore.MVC.Interfaces
 		Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
 		Task<SignInResult> UserSignInAsync(SignInUserModel signInUser);
 		Task SignOutAsync();
+		Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
 	}
 }

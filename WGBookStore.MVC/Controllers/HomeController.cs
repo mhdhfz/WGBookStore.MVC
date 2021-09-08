@@ -10,15 +10,16 @@ namespace WGBookStore.MVC.Controllers
 {
     public class HomeController : Controller
     {
+		private readonly IUserService _userService;
+
+		public HomeController(IUserService userService)
+		{
+			_userService = userService;
+		}
         public ViewResult Index()
 		{
-			// view name and object
-			//var obj = new { Id = 1, Name = "Hafez" };
-			//return View("About", obj);
-
-			// view from another location
-			//return View("~/TempView/PageTemp.cshtml");
-			//return View("../../TempView/PageTemp");
+			var userId = _userService.GetUserId();
+			var isLoggedIn = _userService.IsAuthenticated();
 			return View();
 		}
 

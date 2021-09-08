@@ -78,5 +78,32 @@ namespace WGBookStore.MVC.Controllers
 			await _accRepo.SignOutAsync();
 			return RedirectToAction("Index", "Home");
 		}
+		
+		public IActionResult ChangePassword()
+		{
+			return View();
+		}
+		
+		[HttpPost]
+		public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var result = await _accRepo.ChangePasswordAsync(model);
+				if (result.Succeeded)
+				{
+					ViewBag.IsSuccess = true;
+					ModelState.Clear();
+					return View();
+				}
+
+				foreach (var err in result.Errors)
+				{
+					ModelState.AddModelError("", err.Description);
+				}
+			}
+
+			return View(model);
+		}
 	}
 }
