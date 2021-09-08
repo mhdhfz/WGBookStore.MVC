@@ -57,6 +57,8 @@ namespace WGBookStore.MVC
 			services.AddScoped<IAccountRepository, AccountRepository>();
 			services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 			services.AddScoped<IUserService, UserService>();
+
+			services.Configure<SMTPConfigModel>(Configuration.GetSection("SMTPConfig"));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
