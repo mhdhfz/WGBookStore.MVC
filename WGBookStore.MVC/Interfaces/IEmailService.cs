@@ -11,5 +11,6 @@ namespace WGBookStore.MVC.Interfaces
     {
 		Task SendTestEmail(UserEmailOptionModel userEmailOption);
 		Task SendEmailForEmailConfirmation(UserEmailOptionModel userEmailOption);
+		Task SendEmailForForgotPassword(UserEmailOptionModel userEmailOption);
 	}
 }

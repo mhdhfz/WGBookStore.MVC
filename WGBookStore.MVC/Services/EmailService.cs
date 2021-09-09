@@ -34,6 +34,15 @@ namespace WGBookStore.MVC.Services
 			await SendEmail(userEmailOption);
 
 		}
+		
+		public async Task SendEmailForForgotPassword(UserEmailOptionModel userEmailOption)
+		{
+			userEmailOption.Subject = UpdatePlaceHolders("Hello {{UserName}}, reset your password.", userEmailOption.PlaceHolders);
+			userEmailOption.Body = UpdatePlaceHolders(GetEmailBody("ForgotPassword"), userEmailOption.PlaceHolders);
+
+			await SendEmail(userEmailOption);
+
+		}
 
 		public EmailService(IOptions<SMTPConfigModel> smtpConfig)
 		{

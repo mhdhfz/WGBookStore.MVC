@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -155,5 +156,31 @@ namespace WGBookStore.MVC.Controllers
             }
 			return View(model);
 		}
-	}
+
+		[AllowAnonymous]
+		[HttpGet("forgot-password")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+		
+		[AllowAnonymous]
+		[HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+				var user = await _accRepo.GetUserByEmailAsync(model.Email);
+                if (user != null)
+                {
+					await _accRepo.GenerateForgotPasswordTokenAsync(user);
+                }
+
+				ModelState.Clear();
+				model.IsEmailSent = true;
+            }
+            return View(model);
+        }
+
+    }
 }

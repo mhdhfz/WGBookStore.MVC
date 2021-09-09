@@ -63,6 +63,15 @@ namespace WGBookStore.MVC.Repositories
 			}
 		}
 
+		public async Task GenerateForgotPasswordTokenAsync(ApplicationUser user)
+		{
+			var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+			if (!string.IsNullOrEmpty(token))
+			{
+				await SendForgotPasswordEmail(user, token);
+			}
+		}
+
 		public async Task<SignInResult> UserSignInAsync(SignInUserModel signInUser)
 		{
 			return await _signInManager.PasswordSignInAsync(signInUser.Email, signInUser.Password, signInUser.RememberMe, false);
@@ -100,6 +109,23 @@ namespace WGBookStore.MVC.Repositories
 			};
 
 			await _emailService.SendEmailForEmailConfirmation(userEmailOption);
+		}
+		
+		private async Task SendForgotPasswordEmail(ApplicationUser user, string token)
+		{
+			string appDomain = _configuration.GetSection("Application:AppDomain").Value;
+			string confirmationLink = _configuration.GetSection("Application:ForgotPassword").Value;
+			UserEmailOptionModel userEmailOption = new UserEmailOptionModel
+			{
+				ToEmails = new List<string> { user.Email },
+				PlaceHolders = new List<KeyValuePair<string, string>>()
+				{
+					new KeyValuePair<string, string>("{{UserName}}", user.FirstName),
+					new KeyValuePair<string, string>("{{Link}}", string.Format(appDomain + confirmationLink, user.Id, token))
+				}
+			};
+
+			await _emailService.SendEmailForForgotPassword(userEmailOption);
 		}
 	}
 }
