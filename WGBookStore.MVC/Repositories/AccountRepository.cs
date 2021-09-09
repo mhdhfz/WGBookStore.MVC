@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WGBookStore.MVC.Interfaces;
 using WGBookStore.MVC.Models;
+using WGBookStore.MVC.Services;
 
 namespace WGBookStore.MVC.Repositories
 {
@@ -32,6 +33,11 @@ namespace WGBookStore.MVC.Repositories
 			_configuration = configuration;
 		}
 
+		public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+			return await _userManager.FindByEmailAsync(email);
+        }
+
 		public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
 		{
 			var user = new ApplicationUser()
@@ -43,13 +49,18 @@ namespace WGBookStore.MVC.Repositories
 			var result = await _userManager.CreateAsync(user, userModel.Password);
 			if (result.Succeeded)
 			{
-				var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-				if (!string.IsNullOrEmpty(token))
-				{
-					await SendEmailConfirmationEmail(user, token);
-				}
+				await GenerateEmailConfirmationTokenAsync(user);
 			}
 			return result;
+		}
+
+		public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+			var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+			if (!string.IsNullOrEmpty(token))
+			{
+				await SendEmailConfirmationEmail(user, token);
+			}
 		}
 
 		public async Task<SignInResult> UserSignInAsync(SignInUserModel signInUser)

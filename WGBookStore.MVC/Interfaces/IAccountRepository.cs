@@ -10,10 +10,12 @@ namespace WGBookStore.MVC.Interfaces
 {
 	public interface IAccountRepository
 	{
+		Task<ApplicationUser> GetUserByEmailAsync(string email);
 		Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
 		Task<SignInResult> UserSignInAsync(SignInUserModel signInUser);
 		Task SignOutAsync();
         Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
 		Task<IdentityResult> ConfirmEmailAsync(string uid, string token);
+		Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
 	}
 }

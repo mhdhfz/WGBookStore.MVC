@@ -38,11 +38,12 @@ namespace WGBookStore.MVC.Controllers
 					{
 						ModelState.AddModelError("", err.Description);
 					}
-					return View();
+					return View(userModel);
 				}
 				ModelState.Clear();
+				return RedirectToAction("ConfirmEmail", new { email = userModel.Email });
 			}
-			return View();
+			return View(userModel);
 		}
 
 		[Route("login")]
@@ -113,18 +114,46 @@ namespace WGBookStore.MVC.Controllers
 		}
 
 		[HttpGet("confirm-email")]
-		public async Task<IActionResult> ConfirmEmail(string uid, string token)
+		public async Task<IActionResult> ConfirmEmail(string uid, string token, string email)
         {
+			EmailConfirmModel model = new EmailConfirmModel
+			{
+				Email = email
+			};
+
             if (!string.IsNullOrEmpty(uid) && !string.IsNullOrEmpty(token))
             {
 				token = token.Replace(' ', '+');
 				var result = await _accRepo.ConfirmEmailAsync(uid, token);
                 if (result.Succeeded)
                 {
-					ViewBag.IsSuccess = true;
+					model.IsEmailVerify = true;
                 }
             }
-			return View();
+			return View(model);
         }
+
+		[HttpPost("confirm-email")]
+		public async Task<IActionResult> ConfirmEmail(EmailConfirmModel model)
+		{
+			var user = await _accRepo.GetUserByEmailAsync(model.Email);
+            if (user != null)
+            {
+                if (user.EmailConfirmed)
+                {
+					model.IsEmailVerify = true;
+					return View(model);
+                }
+
+				await _accRepo.GenerateEmailConfirmationTokenAsync(user);
+				model.IsEmailSent = true;
+				ModelState.Clear();
+            }
+			else
+            {
+				ModelState.AddModelError("", "something went wrong.");
+            }
+			return View(model);
+		}
 	}
 }
