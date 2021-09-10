@@ -182,5 +182,41 @@ namespace WGBookStore.MVC.Controllers
             return View(model);
         }
 
-    }
+		[AllowAnonymous]
+		[HttpGet("reset-password")]
+		public IActionResult ResetPassword(string uid, string token)
+		{
+			ResetPasswordModel resetPasswordModel = new ResetPasswordModel
+			{
+				Token = token,
+				UserId = uid
+			};
+
+			return View(resetPasswordModel);
+		}
+
+		[AllowAnonymous]
+		[HttpPost("reset-password")]
+		public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+		{
+			if (ModelState.IsValid)
+			{
+                model.Token = model.Token.Replace(' ', '+');
+				var result = await _accRepo.ResetPasswordAsync(model);
+                if (result.Succeeded)
+                {
+					ModelState.Clear();
+					model.IsSuccess = true;
+					return View(model);
+
+				}
+                foreach (var err in result.Errors)
+                {
+					ModelState.AddModelError("", err.Description);
+                }
+			}
+			return View(model);
+		}
+
+	}
 }
